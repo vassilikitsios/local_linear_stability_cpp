@@ -1,0 +1,81 @@
+#----------------------------------------
+# linear local stability input deck
+#----------------------------------------
+
+run_analysis = EVP_DoE
+#run_analysis = group_modes
+#run_analysis = EVP_search
+
+equations = laminar
+#equations = turbulent_non_linear_order1
+#equations = turbulent_non_linear_order2
+#equations = turbulent_non_linear_order3
+
+N = 256
+
+#----------------------------------------
+# base flow
+#----------------------------------------
+#base_flow = couette
+
+#base_flow = poiseuille
+
+base_flow = blasius
+tol = 1.0e-6
+max_iter = 1000
+min_iter = 5
+
+#base_flow = shear_layer
+lambda = 1.0
+
+#base_flow = wake
+u_deficit = 0.30
+wake_half_width = 0.5
+
+domain_size = 16.0
+
+# For input file base flow profile
+#base_flow = ../../../3profiles/Kim1987_JFM_channel_data/N064_o3/results/channel_0001
+epsilon = 5.0e-2
+dissipation_ratio = 0.0
+
+#----------------------------------------
+# Boundary conditions
+#----------------------------------------
+#top_boundary_condition = wall
+top_boundary_condition = freestream
+
+bottom_boundary_condition = wall
+#bottom_boundary_condition = freestream
+
+#----------------------------------------
+# stability parameters
+#    Koch 1986
+#----------------------------------------
+Re = 580
+kx_real_max = 0.0
+kx_real_min = 0.154
+N_kx_real = 1
+
+kx_imag_max = 0.0
+kx_imag_min = -0.00451
+N_kx_imag = 1
+
+N_kz_real = 1
+kz_real_max = 0.0
+kz_real_min = 0.0
+kz_imag = 0.0
+
+number_of_eigenvectors_to_write = 10
+
+#search_for_same_mode_type = true
+search_for_same_mode_type = false
+
+#----------------------------------------
+# eigenvalue search parameters
+#----------------------------------------
+omega_real_search = 0.0
+omega_imag_search = -0.17
+dispersion_relationship = ../../eigen_mapping_sorted.mode_0001.dat
+
+#-----------------EOF--------------------

@@ -1,0 +1,86 @@
+#----------------------------------------
+# linear local stability input deck
+#----------------------------------------
+
+run_analysis = EVP_DoE
+#run_analysis = group_modes
+#run_analysis = EVP_search
+#run_analysis = IVP_linear
+#run_analysis = IVP_non_linear
+#run_analysis = Floquet
+
+equations = laminar
+#equations = turbulent_non_linear_order1
+#equations = turbulent_non_linear_order2
+#equations = turbulent_non_linear_order3
+
+N = 256
+
+
+#----------------------------------------
+# base flow
+#----------------------------------------
+# For analytical profiles
+
+#base_flow = couette
+
+#base_flow = poiseuille
+
+#base_flow = blasius
+tol = 1.0e-6
+max_iter = 1000
+min_iter = 5
+
+#base_flow = shear_layer
+lambda = 1.0
+
+#base_flow = wake
+u_deficit = 0.30
+wake_half_width = 0.5
+domain_size = 16.0
+
+# For wall normal profiles
+base_flow = ../2interpolated_profiles/N256/channel_0001
+#base_flow = ../2interpolated_profiles/N128/channel_0001
+#base_flow = ../2interpolated_profiles/N064/channel_0001
+epsilon = 5.0e-2
+dissipation_ratio = 0.0
+
+#----------------------------------------
+# Boundary conditions
+#----------------------------------------
+top_boundary_condition = wall
+#top_boundary_condition = freestream
+
+bottom_boundary_condition = wall
+#bottom_boundary_condition = freestream
+
+#----------------------------------------
+# stability parameters
+#----------------------------------------
+
+Re = 13800
+
+kx_real_min = 3.57
+kx_real_max = 3.57
+N_kx_real = 1
+
+kx_imag_min = 0.285
+kx_imag_max = 0.285
+N_kx_imag = 1
+
+N_kz_real = 1
+kz_real_max = 0.0
+kz_real_min = 0.0
+kz_imag = 0.0
+
+omega_real_search = 1.0
+omega_imag_search = 0.0
+dispersion_relationship = ./results.DoE/eigen_mapping_sorted.mode_0002.dat
+
+search_for_same_mode_type = true
+#search_for_same_mode_type = false
+
+number_of_eigenvectors_to_write = 50
+
+#----------------EOF------------------

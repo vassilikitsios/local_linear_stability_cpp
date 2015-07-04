@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# ----------------------------------------------------------------------------
+# Some important filenames:
+PROGRAM="local_linear_stability"
+OUTPUT_FILE=${PROGRAM}".out"
+ERROR_FILE=${PROGRAM}".err"
+
+PROGRAM_BIN_DIR="../../../drivers/local_linear_stability/bin"
+RESULTS_DIR="./results"
+
+# ----------------------------------------------------------------------------
+# Organise files:
+rm -vrf $PROGRAM $OUTPUT_FILE $ERROR_FILE $RESULTS_DIR *~
+mkdir $RESULTS_DIR
+cp $PROGRAM_BIN_DIR/$PROGRAM .
+
+# ----------------------------------------------------------------------------
+# Running code:
+echo "Running "$PROGRAM" code ..."
+./$PROGRAM
+#$PROGRAM 1>${PROGRAM}.out 2> ${PROGRAM}.err
+
+# ---------------------------------------------------------------------------- 
+# Generate images:
+echo "Generating images..."
+cd images
+gnuplot plot_results.gp
+ps2pdf results.eps
+cd ..
+echo "done."
+echo " "
+
+# ---------------------------------------------------------------------------- 
